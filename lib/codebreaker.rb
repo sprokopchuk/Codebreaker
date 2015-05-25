@@ -1,5 +1,5 @@
-require "./codebreaker/version"
-require './codebreaker/game'
+require "codebreaker/version"
+require 'codebreaker/game'
 
 module Codebreaker
   class CodeGame
