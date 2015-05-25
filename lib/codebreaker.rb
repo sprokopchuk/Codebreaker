@@ -1,5 +1,5 @@
-require "codebreaker/version"
-require 'codebreaker/game'
+require "./codebreaker/version"
+require './codebreaker/game'
 
 module Codebreaker
   class CodeGame
@@ -45,12 +45,10 @@ module Codebreaker
 
     def load_score
       lines = File.readlines('score.txt')
-      res = ""
       lines.each do |line|
         arr_player = line.split("|")
-        res = "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if arr_player[0] == @name
+        puts "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if arr_player[0] == @name
       end
-      res
     end
 
     def save_score
