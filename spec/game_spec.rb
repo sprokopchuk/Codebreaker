@@ -53,7 +53,7 @@ module Codebreaker
       end
 
       it "make a guess when number in the same position" do
-        expect(game.guess(1234)).to match("$+")
+        expect(game.guess(1234)).to match("+")
       end
 
       it "make a guess when number in the different position" do
@@ -88,9 +88,22 @@ module Codebreaker
         expect(game.guess("1335")).to eq("++")
       end
 
-      it "when secret code is 6141 and guess code is 6464" do
+      it "make a guess when secret code is 6141 and guess code is 6464" do
         game.instance_variable_set(:@secret_code, "6141")
         expect(game.guess("6464")).to eq("+-")
+      end
+
+      it "make a guess when secret code is 5431 and guess code is 5412" do
+        game.instance_variable_set(:@secret_code, "5431")
+        expect(game.guess("5412")).to eq("++-")
+      end
+      it "make a guess when secret code is 5566 and guess code is 6565" do
+        game.instance_variable_set(:@secret_code, "5566")
+        expect(game.guess("6565")).to eq("++--")
+      end
+      it "make a guess when secret code is 3312 and guess code is 3124" do
+        game.instance_variable_set(:@secret_code, "3312")
+        expect(game.guess("3124")).to eq("+--")
       end
     end
 

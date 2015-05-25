@@ -6,12 +6,13 @@ module Codebreaker
     def start
       @secret_code, @arr_code, @revealed_nums, @turns, @hint = "", [], "", 5, true
       4.times { @secret_code << rand(1..6).to_s }
+      "Start a new game!"
     end
 
-    attr_reader :revealed_nums, :turns, :hint
+    attr_reader :secret_code, :revealed_nums, :turns, :hint
 
     def guess(code)
-      return "You lose! Secret code was #{@secret_code}." if @turns == 0
+      return "You lose! Secret code was #{@secret_code}." if over?
       raise ArgumentError, "must be four numbers" unless code.to_s.size == 4
       @revealed_nums = ""
       @turns -= 1
@@ -36,18 +37,27 @@ module Codebreaker
           end
         end
       end
-      @revealed_nums == "++++" ? "You win!" : @revealed_nums
+      win? ? "You win!" : @revealed_nums
     end
 
     def use_hint
       hint_num = nil
       if @hint
-        @arr_code.each { |i| hint_num = @arr_code[i] unless @arr_code[i] == "+" }
+        @arr_code.each_index { |i| hint_num = @arr_code[i] unless @arr_code[i] == "+" }
         @hint = false
         hint_num
       else
         @hint
       end
     end
+
+    def over?
+      @turns == 0
+    end
+
+    def win?
+      @revealed_nums == "++++"
+    end
+
   end
 end
