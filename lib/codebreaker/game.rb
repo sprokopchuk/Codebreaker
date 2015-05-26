@@ -1,21 +1,21 @@
 module Codebreaker
   class Game
     def initialize
-      @secret_code, @arr_code, @revealed_nums, @turns, @hint = "", [], "", 5, true
+      @secret_code, @arr_code, @revealed_nums, @attempts, @res, @hint = "", [], "", 5, "", true
     end
     def start
-      @secret_code, @arr_code, @revealed_nums, @turns, @hint = "", [], "", 5, true
+      @secret_code, @arr_code, @revealed_nums, @attempts, @res, @hint = "", [], "", 5, "", true
       4.times { @secret_code << rand(1..6).to_s }
-      "Start a new game!"
+      @res = "Begin a game!"
     end
 
-    attr_reader :secret_code, :revealed_nums, :turns, :hint
+    attr_reader :revealed_nums, :res, :attempts, :hint
 
     def guess(code)
-      return "You lose! Secret code was #{@secret_code}." if over?
+      return @res = "Lose!" if @attempts == 0
       raise ArgumentError, "must be four numbers" unless code.to_s.size == 4
       @revealed_nums = ""
-      @turns -= 1
+      @attempts -= 1
       code = code.to_s
       @arr_code = @secret_code.chars
       a_code = code.chars
@@ -37,7 +37,7 @@ module Codebreaker
           end
         end
       end
-      win? ? "You win!" : @revealed_nums
+      @revealed_nums == "++++" ? @res = "Win!" : @revealed_nums
     end
 
     def use_hint
@@ -50,14 +50,5 @@ module Codebreaker
         @hint
       end
     end
-
-    def over?
-      @turns == 0
-    end
-
-    def win?
-      @revealed_nums == "++++"
-    end
-
   end
 end

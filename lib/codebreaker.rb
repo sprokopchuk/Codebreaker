@@ -2,7 +2,7 @@ require "codebreaker/version"
 require 'codebreaker/game'
 
 module Codebreaker
-  class CodeGame
+  class Codegame
     def initialize(name = "Player")
       @name = name
       @res_game = "Lost"
