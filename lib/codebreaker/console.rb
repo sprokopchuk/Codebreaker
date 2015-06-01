@@ -39,8 +39,6 @@ module Codebreaker
           puts @game.use_hint
         when answer == "score"
           load_score
-        else
-          break
         end
       end
     end
