@@ -24,14 +24,14 @@ module Codebreaker
               puts "You win!"
               puts "Do you wanna save a score?(y/n)"
               a = gets.chomp
-              save_score if a == "y"
+              puts save_score if a == "y"
               break
             end
             if @game.res == "Lose!"
               puts "You lose!"
               puts "Do you wanna save a score?(y/n)"
               a = gets.chomp
-              save_score if a == "y"
+              puts save_score if a == "y"
               break
             end
         when answer == "n"
@@ -39,7 +39,7 @@ module Codebreaker
         when answer == "hint"
           puts @game.use_hint
         when answer == "score"
-          load_score
+          puts load_score
         end
       end
     end
