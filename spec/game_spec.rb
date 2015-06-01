@@ -134,5 +134,19 @@ module Codebreaker
         expect(game.use_hint).to be_falsey
       end
     end
+
+    context "#valid_code?" do
+      it "return true if code consist of 4 numbers" do
+        expect(game.valid_code?(1234)).to be_truthy
+      end
+
+      it "return false if code consist less than 4 numbers" do
+        expect(game.valid_code?(12)).to be_falsey
+      end
+
+      it "return false if code consist more than 4 numbers" do
+        expect(game.valid_code?(12345)).to be_falsey
+      end
+    end
   end
 end

@@ -50,5 +50,9 @@ module Codebreaker
         @hint
       end
     end
+
+    def valid_code?(code)
+      code.to_s.size == 4 ? true : false
+    end
   end
 end
