@@ -50,11 +50,13 @@ module Codebreaker
 
     def load_score(f = "score.dat")
       if File.exists?(f)
+        str = ""
         @score = Marshal.load(File.open(f))
         @score.each do |player|
           arr_player = player.split("|")
-          puts "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if player[0] == @name
+          str << "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip} \n" if player[0] == @name
         end
+        str
       else
        "No score yet"
       end
