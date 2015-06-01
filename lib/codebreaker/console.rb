@@ -52,7 +52,7 @@ module Codebreaker
       if File.exists?(f)
         @score = Marshal.load(File.open(f))
         @score.each do |player|
-          player = line.split("|")
+          arr_player = playyer.split("|")
           puts "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if player[0] == @name
         end
       else
@@ -62,7 +62,8 @@ module Codebreaker
 
     def save_score(f = "score.dat")
       @score << to_s
-      File.write(f, Marshal.dump(@score)) ? true : "File 'score.dat' doesn't exists"
+      File.write(f, Marshal.dump(@score))
+      "Score is saved!"
     end
   end
 end
