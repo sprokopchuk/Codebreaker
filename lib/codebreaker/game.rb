@@ -6,6 +6,7 @@ module Codebreaker
     def start
       @secret_code, @arr_code, @revealed_nums, @attempts, @res, @hint = "", [], "", 5, "", true
       4.times { @secret_code << rand(1..6).to_s }
+      @arr_code = @secret_code.chars
       @res = "Begin a game!"
     end
 
