@@ -3,6 +3,7 @@ module Codebreaker
     def initialize(name = "Player")
       @name = name
       @game = Codebreaker::Game.new
+      File.exists?("score.dat") ? @score = Marshal.load(File.open("score.dat")) : @score = []
     end
 
     attr_accessor :name
@@ -47,18 +48,21 @@ module Codebreaker
       "#{@name}|#{@game.attempts}|#{@game.instance_variable_get(:@secret_code)}|#{@game.res}\n"
     end
 
-    def load_score
-      lines = File.readlines('score.txt')
-      lines.each do |line|
-        arr_player = line.split("|")
-        puts "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if arr_player[0] == @name
+    def load_score(f = "score.dat")
+      if File.exists?(f)
+        @score = Marshal.load(File.open(f))
+        @score.each do |player|
+          player = line.split("|")
+          puts "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if player[0] == @name
+        end
+      else
+       "No score yet"
       end
     end
 
-    def save_score
-      f = File.exists?("score.txt") ? File.open("score.txt", "a") : File.new("score.txt", "a")
-      f.write(self.to_s)
-      puts "Score is saved!"
+    def save_score(f = "score.dat")
+      @score << to_s
+      File.write(f, Marshal.dump(self.to_s)) ? true : "File 'score.dat' doesn't exists"
     end
   end
 end
