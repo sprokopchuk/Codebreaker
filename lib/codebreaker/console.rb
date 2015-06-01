@@ -52,7 +52,7 @@ module Codebreaker
       if File.exists?(f)
         @score = Marshal.load(File.open(f))
         @score.each do |player|
-          arr_player = playyer.split("|")
+          arr_player = player.split("|")
           puts "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip}" if player[0] == @name
         end
       else
