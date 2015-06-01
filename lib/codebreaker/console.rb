@@ -31,7 +31,7 @@ module Codebreaker
               puts "Do you wanna save a score?(y/n)"
               a = gets.chomp
               save_score if a == "y"
-              save_score
+              break
             end
         when answer == "n"
           break
