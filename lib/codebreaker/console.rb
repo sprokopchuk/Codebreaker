@@ -62,7 +62,7 @@ module Codebreaker
 
     def save_score(f = "score.dat")
       @score << to_s
-      File.write(f, Marshal.dump(self.to_s)) ? true : "File 'score.dat' doesn't exists"
+      File.write(f, Marshal.dump(@score)) ? true : "File 'score.dat' doesn't exists"
     end
   end
 end
