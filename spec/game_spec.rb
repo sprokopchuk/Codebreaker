@@ -55,22 +55,39 @@ module Codebreaker
         expect(game.guess(1233)).to eq("")
       end
 
-      it "make a guess when number is longer or less than 4 characters" do
-        expect{game.guess("12345")}.to raise_error(ArgumentError, "must be four numbers")
+      it "make a guess when number is less than 4 characters" do
         expect{game.guess("123")}.to raise_error(ArgumentError, "must be four numbers")
       end
 
-      it "make a guess when code exact match as secret code" do
+      it "make a guess when number is longer than 4 characters" do
+        expect{game.guess("12345")}.to raise_error(ArgumentError, "must be four numbers")
+      end
+
+      it "make a guess when code exact match as secret code: method #guess" do
         expect(game.guess(6664)).to eq("Win!")
+      end
+
+      it "make a guess when code exact match as secret code: method #revealed_nums" do
+        game.guess(6664)
         expect(game.revealed_nums).to eq("++++")
+      end
+
+      it "make a guess when code exact match as secret code: method #res" do
+        game.guess(6664)
         expect(game.res). to eq("Win!")
       end
 
-      it "make a guess when code exact match as secret code" do
+      it "make a guess when attempts is 0: method #guess" do
         game.instance_variable_set(:@attempts, 0)
         expect(game.guess(6654)).to eq("Lose!")
+      end
+
+      it "make a guess when attempts is 0: method #res" do
+        game.instance_variable_set(:@attempts, 0)
+        game.guess(6654)
         expect(game.res).to eq("Lose!")
       end
+
 
       it "make a guess and chnage turns for reveal secret code" do
         expect{game.guess(6666)}.to change{game.attempts}.from(5).to(4)
