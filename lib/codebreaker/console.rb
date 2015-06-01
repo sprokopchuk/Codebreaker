@@ -53,7 +53,7 @@ module Codebreaker
         str = ""
         @score.each do |player|
           arr_player = player.split("|")
-          str << "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip} \n" if player[0] == @name
+          str << "Your name: #{arr_player[0]} | Number of attempts: #{arr_player[1]} | Secret code: #{arr_player[2]} | Result of the game: #{arr_player[3].strip} \n" if arr_player[0] == @name
         end
         str
       else
