@@ -9,7 +9,7 @@ module Codebreaker
 
     def start_game
       puts @game.start
-      while @game.attempts > 0
+      while 1
         puts "Secret code consists of 4 numbers! Do you wanna make a guess?(y/n)"
         puts "Do you want load your score?(score)" if File.exists?("score.txt")
         puts "You wanna use a hint?(hint)" if @game.hint
